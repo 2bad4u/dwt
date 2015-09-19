@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestIwt97Fwt97(t *testing.T) {
+func TestIwt53Fwt53(t *testing.T) {
 
 	xn := make([]float64, 32)
 
@@ -18,11 +18,11 @@ func TestIwt97Fwt97(t *testing.T) {
 
 	fmt.Printf("xn is %v.", xn)
 
-	Fwt97(xn)
-	fmt.Printf("Fwt97(xn) is %v.", xn)
+	Fwt53(xn)
+	fmt.Printf("Fwt53(xn) is %v.", xn)
 
-	Iwt97(xn)
-	fmt.Printf("Iwt97(Fwt97(xn)) is %v.", xn)
+	Iwt53(xn)
+	fmt.Printf("Iwt53(Fwt53(xn)) is %v.", xn)
 
-	assert.InDeltaSlice(t, yn, xn, 0.0000000001, "Iwt97(Fwt97(xn)) != xn")
+	assert.InDeltaSlice(t, yn, xn, 0.0000000001, "Iwt53(Fwt53(xn)) != xn")
 }

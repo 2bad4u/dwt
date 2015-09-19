@@ -1,17 +1,18 @@
 # dwt
 
-*dwt* is simply a GO port of Gregoire Pau's fast discrete bi-orthogonal CDF wavelet transformation examples.
+*dwt* is simply a GO port of Gregoire Pau's 'Fast Discrete Bi-orthogonal CDF Wavelet Transform' examples.
 
-See [dwt97.c](http://web.archive.org/web/20120305164605/http://www.embl.de/~gpau/misc/dwt97.c)
+See [dwt97.c](http://web.archive.org/web/20120305164605/http://www.embl.de/~gpau/misc/dwt97.c),
+[CDF 5/3 Discrete Wavelet Transform: dwt53.c](https://github.com/VadimKirilchuk/jawelet/wiki/CDF-5-3-Discrete-Wavelet-Transform),
+[CDF 9/7 Discrete Wavelet Transform: dwt97.c](https://github.com/VadimKirilchuk/jawelet/wiki/CDF-9-7-Discrete-Wavelet-Transform)
 or [waveletcdf97](http://www.getreuer.info/home/waveletcdf97) for details.
 
 #### Getting
 ```
 go get github.com/2bad4u/dwt
-
 ```
 
-#### Using
+#### Usage
 ```go
 
   import "github.com/2bad4u/dwt"
@@ -22,17 +23,16 @@ go get github.com/2bad4u/dwt
     	x[i] = 5.0 + float64(i) + 0.4*float64(i*i) - 0.02*float64(i*i*i)
     }
 
-    // transform xn
+    // transform xn with CDF 9/7, or CDF 5/3: Fwt53(xn)
     Fwt97(xn)
 
     // xn contains the transformation result
     ...
 
-    // inverse transformation for signal restoration
+    // restore signal with inverse transform, use Iwt53(xn) for CDF 5/3
     Iwt97(xn)
 
     ...
   }
 
 ```
-
