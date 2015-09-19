@@ -24,10 +24,10 @@ const (
 	iscale97 = 1.0 / scale97
 )
 
-//  Fwt97 performs a bi-orthogonal 9/7 wavelet transformation (lifting implementation)
-//  of the signal in slice xn. The length of the signal n = len(xn) must be a power of 2.
+// Fwt97 performs a bi-orthogonal 9/7 wavelet transformation (lifting implementation)
+// of the signal in slice xn. The length of the signal n = len(xn) must be a power of 2.
 //
-//  The input slice xn will be replaced by the transformation:
+// The input slice xn will be replaced by the transformation:
 //
 // The first half part of the output signal contains the approximation coefficients.
 // The second half part contains the detail coefficients (aka. the wavelets coefficients).

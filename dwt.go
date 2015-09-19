@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // Package dwt provides CDF 5/3 & 9/7 Wavelet Transformations.
-// This is as port of Gregoire Pau's C implementation dwt97.c and dwt53.c.
+//	This is as port of Gregoire Pau's C implementation dwt97.c and dwt53.c.
 package dwt
 
 import "fmt"
