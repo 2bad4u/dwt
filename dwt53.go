@@ -18,13 +18,13 @@ const (
 	iscale53 = 1 / scale53
 )
 
-//  Fwt53 performs a bi-orthogonal 5/3 wavelet transformation (lifting implementation)
-//  of the signal in slice xn. The length of the signal n = len(xn) must be a power of 2.
+// Fwt53 performs a bi-orthogonal 5/3 wavelet transformation (lifting implementation)
+// of the signal in slice xn. The length of the signal n = len(xn) must be a power of 2.
 //
-//  The input in slice xn will be replaced by the transformation:
+// The input in slice xn will be replaced by the transformation:
 //
-//  The first half part of the output signal contains the approximation coefficients.
-//  The second half part contains the detail coefficients (aka. the wavelets coefficients).
+// The first half part of the output signal contains the approximation coefficients.
+// The second half part contains the detail coefficients (aka. the wavelets coefficients).
 func Fwt53(xn []float64) {
 	var a float64
 	var i int
