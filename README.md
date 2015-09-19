@@ -1,18 +1,17 @@
-dwt
-===
+# dwt
 
-*dwt* is simply a GO port of Gregoire Pau's fast discrete bi-orthogonal CDF wavelet transformation.
+*dwt* is simply a GO port of Gregoire Pau's fast discrete bi-orthogonal CDF wavelet transformation examples.
 
-See [dwt97.c](https://code.google.com/p/axonlib/source/browse/trunk/extern/dwt97.c?r=19)
+See [dwt97.c](http://web.archive.org/web/20120305164605/http://www.embl.de/~gpau/misc/dwt97.c)
 or [waveletcdf97](http://www.getreuer.info/home/waveletcdf97) for details.
 
-# Installation
+#### Getting
 ```
 go get github.com/2bad4u/dwt
 
 ```
 
-# Usage
+#### Using
 ```go
 
   import "github.com/2bad4u/dwt"
@@ -36,3 +35,4 @@ go get github.com/2bad4u/dwt
   }
 
 ```
+
