@@ -28,8 +28,9 @@ const (
 //  of the signal in slice xn. The length of the signal n = len(xn) must be a power of 2.
 //
 //  The input slice xn will be replaced by the transformation:
-//  	The first half part of the output signal contains the approximation coefficients.
-//  	The second half part contains the detail coefficients (aka. the wavelets coefficients).
+//
+// The first half part of the output signal contains the approximation coefficients.
+// The second half part contains the detail coefficients (aka. the wavelets coefficients).
 func Fwt97(xn []float64) {
 	var a float64
 	var i int
@@ -90,8 +91,9 @@ func Fwt97(xn []float64) {
 // Iwt97 performs an inverse bi-orthogonal 9/7 wavelet transformation of xn.
 // This is the inverse function of Fwt97 so that Iwt97(Fwt97(xn))=xn for every signal xn of length n.
 //
-// The length of slice xn must be a power of 2. The coefficients provided in slice xn are
-// replaced by the original signal.
+// The length of slice xn must be a power of 2.
+//
+// The coefficients provided in slice xn are replaced by the original signal.
 func Iwt97(xn []float64) {
 	var a float64
 	var i int

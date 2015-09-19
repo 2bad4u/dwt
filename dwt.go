@@ -9,7 +9,7 @@ package dwt
 import "fmt"
 
 // validateLen checks that the input length is greater than 1 and a power of 2.
-// The function returns the slices length if valid or panics otherwise.
+// The function returns the slice's length if valid or panics otherwise.
 func validateLen(xn []float64) (n int) {
 	n = len(xn)
 	if n < 2 || !isPowerOfTwo(n) {
