@@ -1,3 +1,5 @@
+[![GoDoc](https://godoc.org/github.com/2bad4u/dwt?status.svg)](https://godoc.org/github.com/2bad4u/dwt)
+
 # dwt
 
 *dwt* is simply a GO port of Gregoire Pau's 'Fast Discrete Bi-orthogonal CDF Wavelet Transform' examples.
