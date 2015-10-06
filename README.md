@@ -1,5 +1,6 @@
 [![GoDoc](https://godoc.org/github.com/2bad4u/dwt?status.svg)](https://godoc.org/github.com/2bad4u/dwt)
 [![Build Status](https://travis-ci.org/2bad4u/dwt.svg)](https://travis-ci.org/2bad4u/dwt)
+[![Coverage Status](https://coveralls.io/repos/2bad4u/dwt/badge.svg?branch=master&service=github)](https://coveralls.io/github/2bad4u/dwt?branch=master)
 
 # dwt
 
