@@ -16,13 +16,13 @@ func TestIwt97Fwt97(t *testing.T) {
 	yn := make([]float64, 32)
 	copy(yn, xn)
 
-	fmt.Printf("xn is %v.", xn)
+	fmt.Printf("xn is %v\n.", xn)
 
 	Fwt97(xn)
-	fmt.Printf("Fwt97(xn) is %v.", xn)
+	fmt.Printf("Fwt97(xn) is %v\n.", xn)
 
 	Iwt97(xn)
-	fmt.Printf("Iwt97(Fwt97(xn)) is %v.", xn)
+	fmt.Printf("Iwt97(Fwt97(xn)) is %v\n.", xn)
 
 	assert.InDeltaSlice(t, yn, xn, 0.0000000001, "Iwt97(Fwt97(xn)) != xn")
 }

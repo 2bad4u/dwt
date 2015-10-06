@@ -26,46 +26,39 @@ const (
 // The first half part of the output signal contains the approximation coefficients.
 // The second half part contains the detail coefficients (aka. the wavelets coefficients).
 func Fwt53(xn []float64) {
-	var a float64
-	var i int
 	n := validateLen(xn)
 
 	// predict 1
-	a = p1_53
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += p1_53 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * p1_53 * xn[n-2]
 
 	// update 1
-	a = u1_53
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += u1_53 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * u1_53 * xn[1]
 
 	// scale
-	a = scale53
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 != 0 {
-			xn[i] = xn[i] * a
+			xn[i] = xn[i] * scale53
 		} else {
-			xn[i] /= a
+			xn[i] /= scale53
 		}
 	}
 
 	// pack
 	tb := make([]float64, n)
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 == 0 {
 			tb[i/2] = xn[i]
 		} else {
 			tb[n/2+i/2] = xn[i]
 		}
 	}
-	for i = 0; i < n; i++ {
-		xn[i] = tb[i]
-	}
+	copy(xn, tb)
 }
 
 // Iwt53 performs an inverse bi-orthogonal 5/3 wavelet transformation of xn.
@@ -75,41 +68,34 @@ func Fwt53(xn []float64) {
 //
 // The coefficients provided in slice xn are replaced by the original signal.
 func Iwt53(xn []float64) {
-	var a float64
-	var i int
 	n := validateLen(xn)
 
 	// unpack
 	tb := make([]float64, n)
-	for i = 0; i < n/2; i++ {
+	for i := 0; i < n/2; i++ {
 		tb[i*2] = xn[i]
 		tb[i*2+1] = xn[i+n/2]
 	}
-	for i = 0; i < n; i++ {
-		xn[i] = tb[i]
-	}
+	copy(xn, tb)
 
 	// undo scale
-	a = iscale53
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 != 0 {
-			xn[i] *= a
+			xn[i] *= iscale53
 		} else {
-			xn[i] /= a
+			xn[i] /= iscale53
 		}
 	}
 
 	// undo update 1
-	a = iu1_53
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += iu1_53 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * iu1_53 * xn[1]
 
 	// undo predict 1
-	a = ip1_53
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += ip1_53 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * ip1_53 * xn[n-2]
 }

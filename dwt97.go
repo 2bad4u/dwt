@@ -32,60 +32,51 @@ const (
 // The first half part of the output signal contains the approximation coefficients.
 // The second half part contains the detail coefficients (aka. the wavelets coefficients).
 func Fwt97(xn []float64) {
-	var a float64
-	var i int
-	var n = validateLen(xn)
+	n := validateLen(xn)
 
 	// predict 1
-	a = p1_97
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += p1_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * p1_97 * xn[n-2]
 
 	// update 1
-	a = u1_97
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += u1_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * u1_97 * xn[1]
 
 	// predict 2
-	a = p2_97
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += p2_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * p2_97 * xn[n-2]
 
 	// update 2
-	a = u2_97
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += u2_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * u2_97 * xn[1]
 
 	// scale
-	a = iscale97
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 != 0 {
-			xn[i] *= a
+			xn[i] *= iscale97
 		} else {
-			xn[i] /= a
+			xn[i] /= iscale97
 		}
 	}
 
 	// pack
 	tb := make([]float64, n)
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 == 0 {
 			tb[i/2] = xn[i]
 		} else {
 			tb[n/2+i/2] = xn[i]
 		}
 	}
-	for i = 0; i < n; i++ {
-		xn[i] = tb[i]
-	}
+	copy(xn, tb)
 }
 
 // Iwt97 performs an inverse bi-orthogonal 9/7 wavelet transformation of xn.
@@ -95,55 +86,46 @@ func Fwt97(xn []float64) {
 //
 // The coefficients provided in slice xn are replaced by the original signal.
 func Iwt97(xn []float64) {
-	var a float64
-	var i int
-	var n = validateLen(xn)
+	n := validateLen(xn)
 
 	// unpack
 	tb := make([]float64, n)
-	for i = 0; i < n/2; i++ {
+	for i := 0; i < n/2; i++ {
 		tb[i*2] = xn[i]
 		tb[i*2+1] = xn[i+n/2]
 	}
-	for i = 0; i < n; i++ {
-		xn[i] = tb[i]
-	}
+	copy(xn, tb)
 
 	// undo scale
-	a = scale97
-	for i = 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if i%2 != 0 {
-			xn[i] *= a
+			xn[i] *= scale97
 		} else {
-			xn[i] /= a
+			xn[i] /= scale97
 		}
 	}
 
 	// undo update 2
-	a = iu2_97
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += iu2_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * iu2_97 * xn[1]
 
 	// undo predict 2
-	a = ip2_97
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += ip2_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * ip2_97 * xn[n-2]
 
 	// undo update 1
-	a = iu1_97
-	for i = 2; i < n; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 2; i < n; i += 2 {
+		xn[i] += iu1_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[0] += 2 * a * xn[1]
+	xn[0] += 2 * iu1_97 * xn[1]
 
 	// undo predict 1
-	a = ip1_97
-	for i = 1; i < n-2; i += 2 {
-		xn[i] += a * (xn[i-1] + xn[i+1])
+	for i := 1; i < n-2; i += 2 {
+		xn[i] += ip1_97 * (xn[i-1] + xn[i+1])
 	}
-	xn[n-1] += 2 * a * xn[n-2]
+	xn[n-1] += 2 * ip1_97 * xn[n-2]
 }
