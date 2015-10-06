@@ -1,4 +1,5 @@
 [![GoDoc](https://godoc.org/github.com/2bad4u/dwt?status.svg)](https://godoc.org/github.com/2bad4u/dwt)
+[![Build Status](https://travis-ci.org/2bad4u/dwt.svg)](https://travis-ci.org/2bad4u/dwt)
 
 # dwt
 
